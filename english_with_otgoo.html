@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English with Otgoo</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1a3a6b;
+  --navy-dark: #102850;
+  --orange: #f5a623;
+  --orange-light: #ffd980;
+  --orange-pale: #fff8ee;
+  --white: #ffffff;
+  --gray-light: #f4f6fb;
+  --gray: #8a9abb;
+  --text: #1a2540;
+  --text-muted: #6b7a99;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Nunito', sans-serif; background: var(--gray-light); color: var(--text); }
+
+/* NAV */
+nav {
+  background: var(--navy);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba(26,58,107,0.3);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.logo-badge {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 3px solid var(--orange);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fredoka One', cursive;
+  font-size: 11px;
+  color: var(--navy);
+  text-align: center;
+  line-height: 1.2;
+}
+.nav-name { font-family: 'Fredoka One', cursive; font-size: 20px; color: var(--white); letter-spacing: 0.5px; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 15px; font-weight: 600; transition: color 0.2s; }
+.nav-links a:hover { color: var(--orange); }
+.nav-cta { background: var(--orange); color: var(--white); border: none; border-radius: 50px; padding: 9px 22px; font-size: 14px; font-weight: 700; font-family: 'Nunito', sans-serif; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+.nav-cta:hover { background: #e09510; transform: scale(1.04); }
+
+/* HERO */
+.hero {
+  background: var(--navy);
+  padding: 64px 32px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(245,166,35,0.08);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245,166,35,0.18);
+  border: 1px solid rgba(245,166,35,0.4);
+  border-radius: 50px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange-light);
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 48px;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.hero h1 span { color: var(--orange); }
+.hero p {
+  font-size: 17px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 32px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 800;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 4px 20px rgba(245,166,35,0.4);
+}
+.btn-primary:hover { background: #e09510; transform: translateY(-2px); }
+.btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  border-radius: 50px;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.18); }
+
+/* STATS BAR */
+.stats-bar {
+  background: var(--white);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  padding: 0;
+  box-shadow: 0 4px 20px rgba(26,58,107,0.08);
+}
+.stat-item {
+  flex: 1;
+  max-width: 200px;
+  padding: 20px 16px;
+  text-align: center;
+  border-right: 1px solid #eef1f7;
+}
+.stat-item:last-child { border-right: none; }
+.stat-num { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--navy); }
+.stat-label { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+
+/* SECTIONS */
+.section { padding: 56px 32px; max-width: 1100px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 36px; }
+.section-tag {
+  display: inline-block;
+  background: var(--orange-pale);
+  color: var(--orange);
+  border-radius: 50px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  border: 1px solid rgba(245,166,35,0.3);
+}
+.section-header h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 32px;
+  color: var(--navy);
+}
+
+/* LEVEL CARDS */
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.level-card {
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.level-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
+.level-card .emoji { font-size: 42px; margin-bottom: 12px; display: block; }
+.level-card h3 { font-family: 'Fredoka One', cursive; font-size: 20px; margin-bottom: 4px; }
+.level-card p { font-size: 13px; font-weight: 600; }
+.level-card .arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.6);
+}
+.lc-1 { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
+.lc-1 h3 { color: #3C3489; } .lc-1 p { color: #534AB7; } .lc-1 .arrow { color: #3C3489; }
+.lc-2 { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+.lc-2 h3 { color: #042C53; } .lc-2 p { color: #185FA5; } .lc-2 .arrow { color: #042C53; }
+.lc-3 { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
+.lc-3 h3 { color: #173404; } .lc-3 p { color: #3B6D11; } .lc-3 .arrow { color: #173404; }
+.lc-4 { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+.lc-4 h3 { color: #412402; } .lc-4 p { color: #854F0B; } .lc-4 .arrow { color: #412402; }
+
+/* FEATURES */
+.feat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.feat-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px 20px;
+  text-align: center;
+  border: 1.5px solid #eef1f7;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.feat-card:hover { border-color: var(--orange); transform: translateY(-3px); }
+.feat-icon-wrap {
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  margin: 0 auto 14px;
+}
+.feat-card h3 { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--navy); margin-bottom: 6px; }
+.feat-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+/* 5 MIN SECTION */
+.five-min-section {
+  background: var(--navy);
+  border-radius: 24px;
+  padding: 48px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto 56px;
+}
+.five-min-text h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 34px;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.five-min-text h2 span { color: var(--orange); }
+.five-min-text p { color: rgba(255,255,255,0.7); font-size: 15px; line-height: 1.7; margin-bottom: 24px; }
+.five-min-steps { display: flex; flex-direction: column; gap: 12px; }
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.07);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+}
+.step-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.step p { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 600; }
+
+/* FACEBOOK CTA */
+.fb-cta {
+  background: var(--orange-pale);
+  border: 2px solid rgba(245,166,35,0.3);
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto 56px;
+}
+.fb-cta h2 { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--navy); margin-bottom: 8px; }
+.fb-cta p { font-size: 15px; color: var(--text-muted); margin-bottom: 24px; }
+.btn-fb {
+  background: #1877f2;
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 13px 32px;
+  font-size: 15px;
+  font-weight: 800;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-fb:hover { background: #1560d4; }
+
+/* FOOTER */
+footer {
+  background: var(--navy-dark);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 24px 32px;
+  font-size: 13px;
+}
+footer span { color: var(--orange); font-weight: 700; }
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .hero h1 { font-size: 32px; }
+  .nav-links { display: none; }
+  .five-min-section { grid-template-columns: 1fr; }
+  .stats-bar { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="logo-badge">ENG<br>Otgoo</div>
+    <span class="nav-name">English with Otgoo</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#levels">Хичээл</a></li>
+    <li><a href="#features">Хэрэгслүүд</a></li>
+    <li><a href="#5min">5 минут</a></li>
+    <li><a href="#contact">Холбоо</a></li>
+  </ul>
+  <button class="nav-cta">Үнэгүй эхлэх</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-pill">🔥 Өдөрт 5 минут — Англи яриа</div>
+  <h1>Англи <span>ярьж сур</span><br>өнөөдрөөс!</h1>
+  <p>Багш Отгоогийн онцгой аргаар бага, дунд, ахлах болон насанд хүрэгчдэд зориулсан сургалт</p>
+  <div class="hero-btns">
+    <button class="btn-primary">Үнэгүй эхлэх 🚀</button>
+    <button class="btn-secondary">Хичээл үзэх</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">5.8K+</div>
+    <div class="stat-label">Facebook дагагч</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">500+</div>
+    <div class="stat-label">Хичээл</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">4</div>
+    <div class="stat-label">Насны бүлэг</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5 мин</div>
+    <div class="stat-label">Өдөрт</div>
+  </div>
+</div>
+
+<!-- LEVELS -->
+<div class="section" id="levels">
+  <div class="section-header">
+    <div class="section-tag">📚 НАСНЫ БҮЛЭГ</div>
+    <h2>Хэн ч сурч болно!</h2>
+  </div>
+  <div class="level-grid">
+    <div class="level-card lc-1">
+      <span class="emoji">🧒</span>
+      <h3>Бага анги</h3>
+      <p>1–5-р анги</p>
+      <div class="arrow">Хичээл үзэх →</div>
+    </div>
+    <div class="level-card lc-2">
+      <span class="emoji">📚</span>
+      <h3>Дунд анги</h3>
+      <p>6–9-р анги</p>
+      <div class="arrow">Хичээл үзэх →</div>
+    </div>
+    <div class="level-card lc-3">
+      <span class="emoji">🎓</span>
+      <h3>Ахлах анги</h3>
+      <p>10–12-р анги</p>
+      <div class="arrow">Хичээл үзэх →</div>
+    </div>
+    <div class="level-card lc-4">
+      <span class="emoji">👩‍💼</span>
+      <h3>Насанд хүрэгч</h3>
+      <p>Ажил, амьдралд</p>
+      <div class="arrow">Хичээл үзэх →</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div style="background: var(--white); padding: 8px 0;">
+<div class="section" id="features">
+  <div class="section-header">
+    <div class="section-tag">✨ СУРГАЛТЫН ХЭРЭГСЛҮҮД</div>
+    <h2>Бүх зүйл нэг дор!</h2>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon-wrap" style="background:#ede9fe;">📖</div>
+      <h3>Хичээл</h3>
+      <p>Тайлбартай, дүрслэлтэй хичээлүүд</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-wrap" style="background:#dbeafe;">✅</div>
+      <h3>Тест</h3>
+      <p>Мэдлэгээ шалгах онлайн тест</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-wrap" style="background:#d1fae5;">🎥</div>
+      <h3>Видео</h3>
+      <p>Дүрслэлт видео хичээлүүд</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon-wrap" style="background:#fef3c7;">🏆</div>
+      <h3>Дасгал</h3>
+      <p>Өдөр тутмын онлайн даалгавар</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- 5 MIN SECTION -->
+<div style="padding: 56px 32px;" id="5min">
+<div class="five-min-section">
+  <div class="five-min-text">
+    <h2>Өдөрт ердөө<br><span>5 минут!</span> 🔥</h2>
+    <p>Багш Отгоогийн онцгой арга — өдөрт 5 минут л зарцуулж, англи хэлийг хурдан дэвшүүлэ. Хэцүү биш, зүгээр л тогтмол байгаарай!</p>
+    <button class="btn-primary">Эхлэх →</button>
+  </div>
+  <div class="five-min-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <p>🎧 Өдөрт 1 шинэ үг сур</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <p>🗣️ Чанга дуугаар давта</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <p>✍️ Жижиг тест бөглө</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <p>🌟 Маргааш дахиж ир!</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- FB CTA -->
+<div style="padding: 0 32px;" id="contact">
+<div class="fb-cta">
+  <h2>📘 Facebook-т бидэнтэй нэгд!</h2>
+  <p>English with Otgoo хуудсыг дага — өдөр бүр шинэ хичээл, зөвлөгөө авна!</p>
+  <button class="btn-fb" onclick="window.open('https://facebook.com', '_blank')">Facebook хуудас руу очих →</button>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <span>English with Otgoo</span> · Увс аймаг, Баруунтуруун · Бүх эрх хамгаалагдсан</p>
+</footer>
+
+</body>
+</html>

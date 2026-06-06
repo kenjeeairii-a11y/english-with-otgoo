@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бага анги — English with Otgoo</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1a3a6b;
+  --navy-dark: #102850;
+  --orange: #f5a623;
+  --orange-pale: #fff8ee;
+  --white: #ffffff;
+  --gray-light: #f4f6fb;
+  --text: #1a2540;
+  --text-muted: #6b7a99;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --purple: #7c3aed;
+  --purple-light: #ede9fe;
+  --green: #16a34a;
+  --green-light: #dcfce7;
+  --red: #dc2626;
+  --red-light: #fee2e2;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Nunito', sans-serif; background: var(--gray-light); color: var(--text); }
+
+nav {
+  background: var(--navy);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba(26,58,107,0.3);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-badge {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--white); border: 3px solid var(--orange);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fredoka One', cursive; font-size: 10px; color: var(--navy); text-align: center; line-height: 1.2;
+}
+.nav-title { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--white); }
+.nav-back { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.nav-back:hover { color: var(--orange); }
+
+.hero {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  padding: 36px 24px;
+  text-align: center;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50px;
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.hero h1 { font-family: 'Fredoka One', cursive; font-size: 36px; color: #fff; margin-bottom: 8px; }
+.hero p { font-size: 15px; color: rgba(255,255,255,0.8); }
+
+.tabs {
+  display: flex;
+  background: var(--white);
+  border-bottom: 2px solid #eef1f7;
+  padding: 0 24px;
+  gap: 4px;
+  position: sticky;
+  top: 60px;
+  z-index: 99;
+}
+.tab {
+  padding: 14px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.2s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: 'Nunito', sans-serif;
+}
+.tab.active { color: var(--purple); border-bottom-color: var(--purple); }
+.tab:hover { color: var(--navy); }
+
+.content { padding: 24px; max-width: 900px; margin: 0 auto; }
+.section { display: none; }
+.section.active { display: block; }
+
+/* VOCABULARY */
+.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+.vocab-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 20px 14px;
+  text-align: center;
+  border: 2px solid #eef1f7;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.vocab-card:hover { transform: translateY(-3px); border-color: var(--orange); }
+.vocab-emoji { font-size: 36px; margin-bottom: 8px; }
+.vocab-en { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--navy); }
+.vocab-mn { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-top: 4px; }
+.vocab-sound { font-size: 11px; color: var(--orange); margin-top: 3px; font-weight: 700; }
+
+/* GRAMMAR */
+.lesson-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+  border: 1.5px solid #eef1f7;
+}
+.lesson-num {
+  display: inline-block;
+  background: var(--purple-light);
+  color: var(--purple);
+  border-radius: 50px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.lesson-title { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--navy); margin-bottom: 10px; }
+.lesson-body { font-size: 15px; color: var(--text); line-height: 1.7; margin-bottom: 14px; }
+.example-box {
+  background: var(--purple-light);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.example-box p { font-size: 15px; font-weight: 700; color: #3c3489; margin-bottom: 3px; }
+.example-box span { font-size: 13px; color: #534ab7; }
+.rule-box {
+  background: #fff8ee;
+  border: 1.5px solid rgba(245,166,35,0.3);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #854f0b;
+}
+
+/* QUIZ */
+.quiz-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  margin-bottom: 20px;
+  border: 1.5px solid #eef1f7;
+}
+.quiz-num { font-size: 12px; font-weight: 800; color: var(--text-muted); margin-bottom: 10px; }
+.quiz-q { font-family: 'Fredoka One', cursive; font-size: 20px; color: var(--navy); margin-bottom: 18px; }
+.quiz-emoji { font-size: 48px; margin-bottom: 14px; display: block; text-align: center; }
+.options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.option {
+  background: var(--gray-light);
+  border: 2px solid #eef1f7;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Nunito', sans-serif;
+  text-align: left;
+}
+.option:hover { border-color: var(--purple); background: var(--purple-light); color: var(--purple); }
+.option.correct { background: var(--green-light); border-color: var(--green); color: var(--green); }
+.option.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+.option:disabled { cursor: not-allowed; }
+.feedback {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+  display: none;
+}
+.feedback.correct { background: var(--green-light); color: var(--green); display: block; }
+.feedback.wrong { background: var(--red-light); color: var(--red); display: block; }
+
+.score-box {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+  display: none;
+}
+.score-box h2 { font-family: 'Fredoka One', cursive; font-size: 28px; color: #fff; margin-bottom: 8px; }
+.score-box p { color: rgba(255,255,255,0.85); font-size: 15px; margin-bottom: 16px; }
+.score-num { font-family: 'Fredoka One', cursive; font-size: 56px; color: var(--orange); }
+.btn-retry {
+  background: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 800;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+}
+.section-title { font-family: 'Fredoka One', cursive; font-size: 24px; color: var(--navy); margin-bottom: 6px; }
+.section-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+
+footer {
+  background: var(--navy-dark, #102850);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+  margin-top: 40px;
+}
+footer span { color: var(--orange); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-badge">ENG<br>Otgoo</div>
+    <span class="nav-title">English with Otgoo</span>
+  </a>
+  <a class="nav-back" href="index.html">← Буцах</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">🧒 Бага анги • 1–5-р анги</div>
+  <h1>Англи хэл сурцгааья!</h1>
+  <p>Үг, дүрэм, тест — бүгд нэг дор!</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('vocab')">📚 Үг</button>
+  <button class="tab" onclick="showTab('grammar')">✏️ Дүрэм</button>
+  <button class="tab" onclick="showTab('speaking')">🗣️ Яриа</button>
+  <button class="tab" onclick="showTab('quiz')">✅ Тест</button>
+</div>
+
+<div class="content">
+
+  <!-- VOCABULARY -->
+  <div class="section active" id="vocab">
+    <div class="section-title">📚 Үгийн сан</div>
+    <div class="section-desc">Зураг дээр дарж үгийг сур!</div>
+    <div class="vocab-grid">
+      <div class="vocab-card"><div class="vocab-emoji">🍎</div><div class="vocab-en">Apple</div><div class="vocab-mn">Алим</div><div class="vocab-sound">[ æp-əl ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🐱</div><div class="vocab-en">Cat</div><div class="vocab-mn">Муур</div><div class="vocab-sound">[ kæt ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🐶</div><div class="vocab-en">Dog</div><div class="vocab-mn">Нохой</div><div class="vocab-sound">[ dɔːɡ ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">📚</div><div class="vocab-en">Book</div><div class="vocab-mn">Ном</div><div class="vocab-sound">[ bʊk ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🏠</div><div class="vocab-en">House</div><div class="vocab-mn">Гэр</div><div class="vocab-sound">[ haʊs ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🌞</div><div class="vocab-en">Sun</div><div class="vocab-mn">Нар</div><div class="vocab-sound">[ sʌn ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🌙</div><div class="vocab-en">Moon</div><div class="vocab-mn">Сар</div><div class="vocab-sound">[ muːn ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">⭐</div><div class="vocab-en">Star</div><div class="vocab-mn">Од</div><div class="vocab-sound">[ stɑːr ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🌊</div><div class="vocab-en">Water</div><div class="vocab-mn">Ус</div><div class="vocab-sound">[ wɔːtər ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🔥</div><div class="vocab-en">Fire</div><div class="vocab-mn">Гал</div><div class="vocab-sound">[ faɪər ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🌲</div><div class="vocab-en">Tree</div><div class="vocab-mn">Мод</div><div class="vocab-sound">[ triː ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🌺</div><div class="vocab-en">Flower</div><div class="vocab-mn">Цэцэг</div><div class="vocab-sound">[ flaʊər ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">✏️</div><div class="vocab-en">Pencil</div><div class="vocab-mn">Харандаа</div><div class="vocab-sound">[ pens-əl ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🎒</div><div class="vocab-en">Bag</div><div class="vocab-mn">Цүнх</div><div class="vocab-sound">[ bæɡ ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🚗</div><div class="vocab-en">Car</div><div class="vocab-mn">Машин</div><div class="vocab-sound">[ kɑːr ]</div></div>
+      <div class="vocab-card"><div class="vocab-emoji">🐦</div><div class="vocab-en">Bird</div><div class="vocab-mn">Шувуу</div><div class="vocab-sound">[ bɜːrd ]</div></div>
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div class="section" id="grammar">
+    <div class="section-title">✏️ Дүрэм</div>
+    <div class="section-desc">Англи хэлний үндсэн дүрмүүд</div>
+
+    <div class="lesson-card">
+      <div class="lesson-num">🟣 Хичээл 1</div>
+      <div class="lesson-title">I am / You are / He is</div>
+      <div class="lesson-body">Англи хэлд "байна" гэдгийг <strong>am, is, are</strong> гэж хэлдэг. Хэн ярьж байгаагаас хамааран өөр өөр хэлбэр ашигладаг.</div>
+      <div class="example-box"><p>I am a student.</p><span>Би сурагч.</span></div>
+      <div class="example-box"><p>You are my friend.</p><span>Чи миний найз.</span></div>
+      <div class="example-box"><p>He is a teacher.</p><span>Тэр (эрэгтэй) багш.</span></div>
+      <div class="rule-box">💡 I → am &nbsp;|&nbsp; He/She/It → is &nbsp;|&nbsp; You/We/They → are</div>
+    </div>
+
+    <div class="lesson-card">
+      <div class="lesson-num">🟣 Хичээл 2</div>
+      <div class="lesson-title">Өнгөнүүд — Colors</div>
+      <div class="lesson-body">Өнгийг англиар хэрхэн хэлэх вэ?</div>
+      <div class="example-box"><p>The apple is red. 🍎</p><span>Алим улаан байна.</span></div>
+      <div class="example-box"><p>The sky is blue. 🌤️</p><span>Тэнгэр цэнхэр байна.</span></div>
+      <div class="example-box"><p>The grass is green. 🌿</p><span>Өвс ногоон байна.</span></div>
+      <div class="rule-box">💡 Red=улаан, Blue=цэнхэр, Green=ногоон, Yellow=шар, White=цагаан, Black=хар</div>
+    </div>
+
+    <div class="lesson-card">
+      <div class="lesson-num">🟣 Хичээл 3</div>
+      <div class="lesson-title">Тоолох — Numbers 1-10</div>
+      <div class="lesson-body">1-ээс 10 хүртэлх тоог англиар сур!</div>
+      <div class="example-box"><p>1=One, 2=Two, 3=Three, 4=Four, 5=Five</p><span>Нэг, хоёр, гурав, дөрөв, тав</span></div>
+      <div class="example-box"><p>6=Six, 7=Seven, 8=Eight, 9=Nine, 10=Ten</p><span>Зургаа, долоо, найм, ес, арав</span></div>
+      <div class="rule-box">💡 I have 2 cats → I have two cats гэж бичдэг!</div>
+    </div>
+
+    <div class="lesson-card">
+      <div class="lesson-num">🟣 Хичээл 4</div>
+      <div class="lesson-title">Мэндлэх — Greetings</div>
+      <div class="lesson-body">Өдөр тутам хэрэглэдэг мэндлэх үгнүүд</div>
+      <div class="example-box"><p>Hello! / Hi!</p><span>Сайн уу!</span></div>
+      <div class="example-box"><p>Good morning! / Good afternoon!</p><span>Өглөөний мэнд! / Өдрийн мэнд!</span></div>
+      <div class="example-box"><p>Goodbye! / See you!</p><span>Баяртай!</span></div>
+      <div class="rule-box">💡 How are you? → I am fine, thank you! гэж хариулдаг</div>
+    </div>
+  </div>
+
+  <!-- SPEAKING -->
+  <div class="section" id="speaking">
+    <div class="section-title">🗣️ Ярианы хэллэг</div>
+    <div class="section-desc">Өдөр тутам хэрэглэдэг хэллэгүүд</div>
+
+    <div class="lesson-card">
+      <div class="lesson-num">🟠 Хэллэг 1 — Сургуульд</div>
+      <div class="lesson-title">At School</div>
+      <div class="example-box"><p>May I go to the toilet?</p><span>Би жорлонд явж болох уу?</span></div>
+      <div class="example-box"><p>I don't understand.</p><span>Би ойлгохгүй байна.</span></div>
+      <div class="example-box"><p>Can you repeat, please?</p><span>Дахин хэлж өгнө үү?</span></div>
+      <div class="example-box"><p>What does this mean?</p><span>Энэ юу гэсэн үг вэ?</span></div>
+    </div>
+
+    <div class="lesson-card">
+      <div class="lesson-num">🟠 Хэллэг 2 — Танилцах</div>
+      <div class="lesson-title">Nice to meet you!</div>
+      <div class="example-box"><p>My name is Otgoo.</p><span>Миний нэр Отгоо.</span></div>
+      <div class="example-box"><p>I am 10 years old.</p><span>Би 10 настай.</span></div>
+      <div class="example-box"><p>I live in Mongolia.</p><span>Би Монголд амьдардаг.</span></div>
+      <div class="example-box"><p>Nice to meet you!</p><span>Таньж баярлалаа!</span></div>
+    </div>
+
+    <div class="lesson-card">
+      <div class="lesson-num">🟠 Хэллэг 3 — Хоол хүнс</div>
+      <div class="lesson-title">Food & Drinks</div>
+      <div class="example-box"><p>I am hungry.</p><span>Би өлссөн байна.</span></div>
+      <div class="example-box"><p>I like pizza!</p><span>Би пицца дуртай!</span></div>
+      <div class="example-box"><p>Can I have some water?</p><span>Надад ус өгнө үү?</span></div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="quiz">
+    <div class="section-title">✅ Тест</div>
+    <div class="section-desc">Мэдлэгээ шалгацгааё! 10 асуулт байна.</div>
+
+    <div class="score-box" id="scoreBox">
+      <div class="score-num" id="scoreNum">0/10</div>
+      <h2>Тест дууслаа! 🎉</h2>
+      <p id="scoreMsg">Сайн хийлээ!</p>
+      <button class="btn-retry" onclick="retryQuiz()">🔄 Дахин оролдох</button>
+    </div>
+
+    <div id="quizContainer">
+      <div class="quiz-card" id="q1">
+        <div class="quiz-num">Асуулт 1 / 10</div>
+        <span class="quiz-emoji">🍎</span>
+        <div class="quiz-q">Энэ юу вэ?</div>
+        <div class="options">
+          <button class="option" onclick="answer(this,'q1',true)">Apple</button>
+          <button class="option" onclick="answer(this,'q1',false)">Banana</button>
+          <button class="option" onclick="answer(this,'q1',false)">Orange</button>
+          <button class="option" onclick="answer(this,'q1',false)">Mango</button>
+        </div>
+        <div class="feedback" id="fb1"></div>
+      </div>
+
+      <div class="quiz-card" id="q2">
+        <div class="quiz-num">Асуулт 2 / 10</div>
+        <div class="quiz-q">"Нохой" гэдгийг англиар яаж хэлэх вэ?</div>
+        <div class="options">
+          <button class="option" onclick="answer(this,'q2',false)">Cat</button>
+          <button class="option" onclick="answer(this,'q2',true)">Dog</button>
+          <button class="option" onclick="answer(this,'q2',false)">Bird</button>
+          <button class="option" onclick="answer(this,'q2',false)">Fish</button>
+        </div>
+        <div class="feedback" id="fb2"></div>
+      </div>
+
+      <div class="quiz-card" id="q3">
+        <div class="quiz-num">Асуулт 3 / 10</div>
+        <div class="quiz-q">"I ___ a student." — Хоосон зайд юу тавих вэ?</div>
+        <div class="options">
+          <button class="option" onclick="answer(this,'q3',false)">is</button>
+          <button class="option" onclick="answer(this,'q3',false)">are</button>
+          <button class="option" onclick="answer(this,'q3',true)">am</button>
+          <button class="option" onclick="answer(this,'q3',false)">be</button>
+        </div>
+        <div class="feedback" id="fb3"></div>
+      </div>
+
+      <div class="quiz-card" id="q4">
+        <div class="quiz-num">Асуулт 4 / 10</div>
+        <span class="quiz-emoji">🔴</span>
+        <div class="quiz-q">Энэ ямар өнгө вэ?</div>
+        <div class="options">
+          <button class="option" onclick="answer(this,'q4',false)">Blue</button>
+          <button class="option" onclick="answer(this,'q4',false)">Green</button>
+          <button class="option" onclick="answer(this,'q4',true)">Red</button>
+          <button class="option" onclick="answer(this,'q4',false)">Yellow</button>
+        </div>
+        <div class="feedback" id="fb4"></div>
+      </div>
+
+      <div class="quiz-card" id="q5">
+        <div class="quiz-num">Асуулт 5 / 10</div>
+        <div class="quiz-q">"Five" гэдэг тоо хэд вэ?</div>
+        <div class="options">
+          <button class="option" onclick="answer(this,'q5',false)">3</button>
+          <button class="option" onclick="answer(this,'q5',false)">4</button>
+          <button class="option" onclick="answer(this,'q5',true)">5</button>
+          <button class="option" onclick="answer(this,'q5',false)">6</button>
+        </div>
+        <div class="feedback" id="fb5"></div>
+      </div>
+
+      <div class="quiz-card" id="q6">
+        <div class="quiz-num">Асуулт 6 / 10</div>
+        <div class="quiz-q">"Good morning!" гэдэг юу гэсэн үг вэ?</div>
+        <div class="options">
+          <button class="option" onclick="answer(this,'q6',false)">Баяртай!</button>
+          <button class="option" onclick="answer(this,'q6',true)">Өглөөний мэнд!</button>
+          <button class="option" onclick="answer(this,'q6',false)">Орой мэнд!</button>
+          <button class="option" onclick="answer(this,'q6',false)">Сайн уу!</button>
+        </div>
+        <div class="feedback" id="fb6"></div>
+      </div>
+
+      <div class="quiz-card" id="q7">
+        <div class="quiz-num">Асуулт 7 / 10</div>
+        <span class="quiz-emoji">📚</span>
+        <div class="quiz-q">Энэ юу вэ?</div>
+        <div class="options">
+          <button class="option" onclick="answer(this,'q7',false)">Pencil</button>
+          <button class="option" onclick="answer(this,'q7',false)">Bag</button>
+          <button class="option" onclick="answer(this,'q7',true)">Book</button>
+          <button class="option" onclick="answer(this,'q7',false)">Chair</button>
+        </div>
+        <div class="feedback" id="fb7"></div>
+      </div>
+
+      <div class="quiz-card" id="q8">
+        <div class="quiz-num">Асуулт 8 / 10</div>
+        <div class="quiz-q">"She ___ my teacher." — Зөв хариулт?</div>
+        <div class="options">
+          <button class="option" onclick="answer(this,'q8',false)">am</button>
+          <button class="option" onclick="answer(this,'q8',false)">are</button>
+          <button class="option" onclick="answer(this,'q8',true)">is</button>
+          <button class="option" onclick="answer(this,'q8',false)">be</button>
+        </div>
+        <div class="feedback" id="fb8"></div>
+      </div>
+
+      <div class="quiz-card" id="q9">
+        <div class="quiz-num">Асуулт 9 / 10</div>
+        <div class="quiz-q">"I am hungry." гэдэг юу гэсэн үг вэ?</div>
+        <div class="options">
+          <button class="option" onclick="answer(this,'q9',false)">Би цангасан.</button>
+          <button class="option" onclick="answer(this,'q9',true)">Би өлссөн.</button>
+          <button class="option" onclick="answer(this,'q9',false)">Би ядарсан.</button>
+          <button class="option" onclick="answer(this,'q9',false)">Би хурдан.</button>
+        </div>
+        <div class="feedback" id="fb9"></div>
+      </div>
+
+      <div class="quiz-card" id="q10">
+        <div class="quiz-num">Асуулт 10 / 10</div>
+        <div class="quiz-q">"Ten" гэдэг тоо хэд вэ?</div>
+        <div class="options">
+          <button class="option" onclick="answer(this,'q10',false)">7</button>
+          <button class="option" onclick="answer(this,'q10',false)">8</button>
+          <button class="option" onclick="answer(this,'q10',false)">9</button>
+          <button class="option" onclick="answer(this,'q10',true)">10</button>
+        </div>
+        <div class="feedback" id="fb10"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 <span>English with Otgoo</span> · Увс аймаг, Баруунтуруун</p>
+</footer>
+
+<script>
+let score = 0;
+let answered = 0;
+const total = 10;
+
+function showTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function answer(btn, qId, isCorrect) {
+  const card = document.getElementById(qId);
+  const opts = card.querySelectorAll('.option');
+  const fb = document.getElementById('fb' + qId.replace('q',''));
+  opts.forEach(o => { o.disabled = true; });
+  if (isCorrect) {
+    btn.classList.add('correct');
+    fb.textContent = '✅ Зөв! Маш сайн!';
+    fb.className = 'feedback correct';
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = '❌ Буруу. Дараагийн удаа зөв хийгээрэй!';
+    fb.className = 'feedback wrong';
+  }
+  answered++;
+  if (answered === total) {
+    setTimeout(showScore, 800);
+  }
+}
+
+function showScore() {
+  document.getElementById('quizContainer').style.display = 'none';
+  const box = document.getElementById('scoreBox');
+  box.style.display = 'block';
+  document.getElementById('scoreNum').textContent = score + '/' + total;
+  let msg = '';
+  if (score === 10) msg = '🏆 Гайхалтай! Бүгдийг зөв хийлээ!';
+  else if (score >= 7) msg = '🌟 Сайн хийлээ! Цааш үргэлжлүүл!';
+  else if (score >= 5) msg = '👍 Дунд зэрэг. Дахин давтаарай!';
+  else msg = '💪 Бага оноо авлаа. Хичээлийг дахин уншаарай!';
+  document.getElementById('scoreMsg').textContent = msg;
+}
+
+function retryQuiz() {
+  score = 0; answered = 0;
+  document.getElementById('scoreBox').style.display = 'none';
+  document.getElementById('quizContainer').style.display = 'block';
+  document.querySelectorAll('.option').forEach(o => {
+    o.disabled = false;
+    o.classList.remove('correct','wrong');
+  });
+  document.querySelectorAll('.feedback').forEach(f => {
+    f.className = 'feedback';
+    f.textContent = '';
+  });
+}
+</script>
+</body>
+</html>

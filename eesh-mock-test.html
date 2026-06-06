@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ЭЕШ Mock Test — English with Otgoo</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#1a3a6b;--navy-dark:#102850;--orange:#f5a623;--orange-pale:#fff8ee;
+  --white:#fff;--gray-light:#f4f6fb;--text:#1a2540;--text-muted:#6b7a99;
+  --green:#16a34a;--green-light:#dcfce7;--red:#dc2626;--red-light:#fee2e2;
+  --blue:#185fa5;--blue-light:#dbeafe;--radius:14px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--gray-light);color:var(--text);}
+nav{background:var(--navy);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(26,58,107,0.3);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-badge{width:38px;height:38px;border-radius:50%;background:#fff;border:3px solid var(--orange);display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:10px;color:var(--navy);text-align:center;line-height:1.2;}
+.nav-title{font-family:'Fredoka One',cursive;font-size:18px;color:#fff;}
+.nav-back{color:rgba(255,255,255,0.75);text-decoration:none;font-size:14px;font-weight:600;}
+.nav-back:hover{color:var(--orange);}
+#homePage{display:block;}#testPage{display:none;}#resultPage{display:none;}
+.hero{background:linear-gradient(135deg,#1a3a6b,#2d5a9e);padding:40px 24px;text-align:center;}
+.hero-badge{display:inline-block;background:rgba(245,166,35,0.25);border:1px solid rgba(245,166,35,0.5);border-radius:50px;padding:6px 16px;font-size:13px;font-weight:700;color:var(--orange);margin-bottom:14px;}
+.hero h1{font-family:'Fredoka One',cursive;font-size:34px;color:#fff;margin-bottom:8px;}
+.hero p{font-size:15px;color:rgba(255,255,255,0.75);}
+.home-content{max-width:900px;margin:0 auto;padding:28px 24px;}
+.info-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;}
+.info-item{background:#fff;border-radius:var(--radius);padding:16px;text-align:center;border:1.5px solid #eef1f7;}
+.info-num{font-family:'Fredoka One',cursive;font-size:26px;color:var(--navy);}
+.info-label{font-size:12px;color:var(--text-muted);font-weight:600;margin-top:2px;}
+.test-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+.test-card{background:#fff;border-radius:var(--radius);padding:16px 14px;text-align:center;border:2px solid #eef1f7;cursor:pointer;transition:all 0.2s;}
+.test-card:hover{border-color:var(--orange);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.08);}
+.test-card.done{border-color:var(--green);background:var(--green-light);}
+.test-num{font-family:'Fredoka One',cursive;font-size:20px;color:var(--navy);}
+.test-score-label{font-size:11px;color:var(--text-muted);font-weight:600;margin-top:4px;}
+.test-badge{font-size:11px;font-weight:800;padding:3px 10px;border-radius:50px;margin-top:6px;display:inline-block;}
+.badge-new{background:var(--blue-light);color:var(--blue);}
+.badge-done{background:var(--green-light);color:var(--green);}
+.section-title-home{font-family:'Fredoka One',cursive;font-size:22px;color:var(--navy);margin-bottom:16px;}
+.test-header{background:var(--navy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.test-title{font-family:'Fredoka One',cursive;font-size:18px;color:#fff;}
+.test-timer{background:var(--orange);color:#fff;border-radius:50px;padding:6px 16px;font-size:15px;font-weight:800;font-family:'Fredoka One',cursive;}
+.test-progress-bar{height:6px;background:#eef1f7;}
+.test-progress-fill{height:100%;background:var(--orange);transition:width 0.3s;}
+.test-body{max-width:860px;margin:0 auto;padding:24px;}
+.section-label{background:var(--navy);color:#fff;border-radius:var(--radius-sm);padding:8px 16px;font-size:13px;font-weight:800;margin-bottom:16px;display:inline-block;}
+.q-card{background:#fff;border-radius:var(--radius);padding:22px;margin-bottom:14px;border:1.5px solid #eef1f7;}
+.q-num{font-size:11px;font-weight:800;color:var(--text-muted);margin-bottom:8px;}
+.q-text{font-size:15px;font-weight:700;color:var(--text);margin-bottom:14px;line-height:1.6;}
+.q-passage{background:var(--blue-light);border-radius:var(--radius-sm);padding:14px;margin-bottom:14px;font-size:14px;color:#042c53;line-height:1.7;border-left:4px solid var(--blue);}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.opt{background:var(--gray-light);border:2px solid #eef1f7;border-radius:var(--radius-sm);padding:10px 14px;font-size:14px;font-weight:600;color:var(--text);cursor:pointer;transition:all 0.15s;font-family:'Nunito',sans-serif;text-align:left;}
+.opt:hover:not(:disabled){border-color:var(--navy);background:#e8edf7;}
+.opt.selected{border-color:var(--navy);background:var(--blue-light);color:var(--navy);}
+.opt.correct{border-color:var(--green);background:var(--green-light);color:var(--green);}
+.opt.wrong{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.test-footer{position:sticky;bottom:0;background:#fff;border-top:1px solid #eef1f7;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+.answered-info{font-size:13px;color:var(--text-muted);font-weight:600;}
+.btn-submit{background:var(--orange);color:#fff;border:none;border-radius:50px;padding:12px 32px;font-size:15px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;}
+.btn-submit:hover{background:#e09510;}
+.result-body{max-width:700px;margin:0 auto;padding:28px 24px;}
+.result-hero{background:linear-gradient(135deg,#1a3a6b,#2d5a9e);border-radius:20px;padding:36px 24px;text-align:center;margin-bottom:24px;}
+.result-score{font-family:'Fredoka One',cursive;font-size:72px;color:var(--orange);line-height:1;}
+.result-total{font-size:18px;color:rgba(255,255,255,0.7);margin-top:4px;}
+.result-grade{font-family:'Fredoka One',cursive;font-size:28px;color:#fff;margin-top:8px;}
+.result-msg{font-size:15px;color:rgba(255,255,255,0.75);margin-top:6px;}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px;}
+.stat-card{background:#fff;border-radius:var(--radius);padding:16px;text-align:center;border:1.5px solid #eef1f7;}
+.stat-num{font-family:'Fredoka One',cursive;font-size:28px;}
+.stat-label{font-size:12px;color:var(--text-muted);font-weight:600;margin-top:3px;}
+.result-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-back{background:var(--navy);color:#fff;border:none;border-radius:50px;padding:12px 28px;font-size:14px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;}
+.btn-review{background:var(--blue-light);color:var(--blue);border:none;border-radius:50px;padding:12px 28px;font-size:14px;font-weight:800;font-family:'Nunito',sans-serif;cursor:pointer;}
+.review-section{margin-top:24px;}
+.review-title{font-family:'Fredoka One',cursive;font-size:20px;color:var(--navy);margin-bottom:14px;}
+.review-card{background:#fff;border-radius:var(--radius);padding:18px;margin-bottom:12px;border:1.5px solid #eef1f7;}
+.review-card.correct-card{border-color:var(--green);}
+.review-card.wrong-card{border-color:var(--red);}
+.review-q{font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.review-ans{font-size:13px;padding:6px 12px;border-radius:var(--radius-sm);margin-bottom:4px;font-weight:600;}
+.review-correct{background:var(--green-light);color:var(--green);}
+.review-wrong{background:var(--red-light);color:var(--red);}
+footer{background:#102850;color:rgba(255,255,255,0.6);text-align:center;padding:18px;font-size:13px;margin-top:40px;}
+footer span{color:var(--orange);font-weight:700;}
+@media(max-width:600px){.opts{grid-template-columns:1fr;}.info-bar{grid-template-columns:repeat(2,1fr);}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-badge">ENG<br>Otgoo</div>
+    <span class="nav-title">English with Otgoo</span>
+  </a>
+  <a class="nav-back" href="index.html">← Буцах</a>
+</nav>
+
+<div id="homePage">
+  <div class="hero">
+    <div class="hero-badge">🎓 Ахлах анги • ЭЕШ Бэлтгэл</div>
+    <h1>ЭЕШ Mock Test</h1>
+    <p>50 дасгал тест — Яг ЭЕШ-ийн чиглэлээр • 100 оноо • 60 минут</p>
+  </div>
+  <div class="home-content">
+    <div class="info-bar">
+      <div class="info-item"><div class="info-num">50</div><div class="info-label">Mock тест</div></div>
+      <div class="info-item"><div class="info-num">40</div><div class="info-label">Асуулт/тест</div></div>
+      <div class="info-item"><div class="info-num">100</div><div class="info-label">Нийт оноо</div></div>
+      <div class="info-item"><div class="info-num">60</div><div class="info-label">Минут</div></div>
+    </div>
+    <div class="section-title-home">📋 Тест сонгох</div>
+    <div class="test-grid" id="testGrid"></div>
+  </div>
+</div>
+
+<div id="testPage">
+  <div class="test-header">
+    <div class="test-title" id="testTitleHeader">Mock Test #1</div>
+    <div class="test-timer" id="timerDisplay">60:00</div>
+  </div>
+  <div class="test-progress-bar"><div class="test-progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="test-body" id="testBody"></div>
+  <div class="test-footer">
+    <div class="answered-info" id="answeredInfo">0 / 40 асуулт хариулсан</div>
+    <button class="btn-submit" onclick="submitTest()">Тест илгээх ✓</button>
+  </div>
+</div>
+
+<div id="resultPage">
+  <div class="result-body">
+    <div class="result-hero">
+      <div class="result-score" id="resultScore">0</div>
+      <div class="result-total">/ 100 оноо</div>
+      <div class="result-grade" id="resultGrade">A</div>
+      <div class="result-msg" id="resultMsg"></div>
+    </div>
+    <div class="result-stats">
+      <div class="stat-card"><div class="stat-num" id="statCorrect" style="color:var(--green)">0</div><div class="stat-label">Зөв</div></div>
+      <div class="stat-card"><div class="stat-num" id="statWrong" style="color:var(--red)">0</div><div class="stat-label">Буруу</div></div>
+      <div class="stat-card"><div class="stat-num" id="statTime" style="color:var(--blue)">0</div><div class="stat-label">Минут</div></div>
+    </div>
+    <div class="result-btns">
+      <button class="btn-back" onclick="goHome()">← Тестүүд рүү буцах</button>
+      <button class="btn-review" onclick="toggleReview()">📖 Дүгнэлт харах</button>
+    </div>
+    <div class="review-section" id="reviewSection" style="display:none"></div>
+  </div>
+</div>
+
+<footer><p>© 2026 <span>English with Otgoo</span> · ЭЕШ Бэлтгэл · Увс аймаг, Баруунтуруун</p></footer>
+
+<script>
+const passages=[
+  {text:"Mongolia is a landlocked country in East Asia. It is the world's second-largest landlocked country and one of the most sparsely populated countries. The capital and largest city is Ulaanbaatar. Mongolia has a nomadic culture with rich traditions of horsemanship and eagle hunting. The Mongolian steppe covers much of the country, and the Gobi Desert lies in the south.",qs:[
+    {q:"What type of country is Mongolia?",o:["Island country","Coastal country","Landlocked country","Peninsula country"],a:2},
+    {q:"Where is the Gobi Desert located?",o:["North","East","West","South"],a:3},
+    {q:"What is the capital of Mongolia?",o:["Darkhan","Erdenet","Ulaanbaatar","Choibalsan"],a:2},
+    {q:"Which best describes Mongolia's culture?",o:["Industrial","Maritime","Nomadic","Agricultural"],a:2},
+    {q:"'Sparsely' means:",o:["Densely","Thinly","Heavily","Widely"],a:1}
+  ]},
+  {text:"Climate change is one of the most pressing issues of our time. Rising temperatures, melting glaciers, and extreme weather events are becoming more frequent. Scientists agree that human activities, particularly the burning of fossil fuels, are the primary cause of global warming. Governments around the world are taking steps to reduce carbon emissions and transition to renewable energy sources such as solar and wind power.",qs:[
+    {q:"What is the primary cause of global warming?",o:["Natural disasters","Human activities","Animal agriculture","Ocean currents"],a:1},
+    {q:"Which renewable energy sources are mentioned?",o:["Coal and gas","Nuclear and hydro","Solar and wind","Geothermal and tidal"],a:2},
+    {q:"'Pressing' means:",o:["Unimportant","Urgent","Simple","Boring"],a:1},
+    {q:"What are governments doing about climate change?",o:["Ignoring it","Reducing carbon emissions","Increasing fossil fuel use","Building factories"],a:1},
+    {q:"What is happening to glaciers?",o:["Growing","Melting","Staying the same","Moving north"],a:1}
+  ]},
+  {text:"The internet has revolutionized the way people communicate and access information. Social media platforms allow people to connect with friends and family across the world instantly. However, there are also concerns about privacy, misinformation, and the impact of excessive screen time on mental health. Digital literacy has become an essential skill in the modern world.",qs:[
+    {q:"What has the internet revolutionized?",o:["Transportation","Communication and information access","Agriculture","Manufacturing"],a:1},
+    {q:"What does 'digital literacy' involve?",o:["Reading books online","Using technology effectively and safely","Programming computers","Designing websites"],a:1},
+    {q:"Which concern is mentioned?",o:["Cost of internet","Speed of internet","Privacy and misinformation","Lack of social media"],a:2},
+    {q:"'Revolutionized' means:",o:["Destroyed","Slightly changed","Completely transformed","Maintained"],a:2},
+    {q:"What allows instant global connection?",o:["Television","Radio","Telephone","Social media platforms"],a:3}
+  ]},
+  {text:"Reading books has numerous benefits for both children and adults. It improves vocabulary, enhances concentration, and stimulates imagination. Studies show that regular readers perform better academically and have higher levels of empathy. Libraries play a crucial role in providing access to books for everyone, regardless of their financial situation.",qs:[
+    {q:"One benefit of reading is:",o:["Better physical health","Improved vocabulary","Faster typing","Better cooking"],a:1},
+    {q:"What role do libraries play?",o:["Selling books","Providing access to books","Teaching languages","Running competitions"],a:1},
+    {q:"'Empathy' means:",o:["Intelligence","Understanding others' feelings","Physical strength","Good memory"],a:1},
+    {q:"Who benefits from reading?",o:["Only children","Only adults","Both children and adults","Only students"],a:2},
+    {q:"'Concentration' means:",o:["Confusion","Focus and attention","Speed","Memory"],a:1}
+  ]},
+  {text:"Exercise is essential for maintaining good health. Regular physical activity strengthens muscles and bones, improves cardiovascular health, and boosts mental wellbeing. The World Health Organization recommends at least 150 minutes of moderate exercise per week for adults. Despite these benefits, many people lead sedentary lifestyles due to desk jobs and increased use of technology.",qs:[
+    {q:"WHO recommends how much exercise per week?",o:["60 minutes","100 minutes","150 minutes","200 minutes"],a:2},
+    {q:"'Sedentary' means:",o:["Active","Healthy","Inactive/sitting too much","Athletic"],a:2},
+    {q:"Exercise improves:",o:["Only physical health","Only mental health","Both physical and mental health","Neither"],a:2},
+    {q:"Why do people lead sedentary lifestyles?",o:["They are lazy","Desk jobs and technology","Lack of money","Bad weather"],a:1},
+    {q:"'Cardiovascular' relates to:",o:["Muscles","Bones","Heart and blood vessels","Brain"],a:2}
+  ]},
+  {text:"Education is widely considered to be the foundation of a successful society. It equips individuals with the knowledge and skills needed to contribute to economic growth and social development. Access to quality education remains unequal around the world, with many children in developing countries lacking basic schooling. International organizations and governments are working to ensure that every child receives a quality education.",qs:[
+    {q:"What is education considered to be?",o:["A luxury","Foundation of a successful society","Only for rich people","Optional"],a:1},
+    {q:"What does education equip individuals with?",o:["Money","Knowledge and skills","Fame","Physical strength"],a:1},
+    {q:"Where does unequal access to education occur?",o:["Only in Asia","Only in Africa","Around the world","Only in cities"],a:2},
+    {q:"'Developing countries' refers to:",o:["Rich nations","Poor or emerging nations","European countries","Island nations"],a:1},
+    {q:"Who is working to ensure quality education?",o:["Only governments","Only NGOs","International organizations and governments","Only teachers"],a:2}
+  ]},
+  {text:"Renewable energy is becoming increasingly important as the world faces the challenges of climate change and dwindling fossil fuel reserves. Solar panels, wind turbines, and hydroelectric power stations are examples of technologies that generate electricity without producing greenhouse gases. While the initial cost of installing renewable energy systems can be high, the long-term benefits include reduced energy costs and a cleaner environment.",qs:[
+    {q:"Why is renewable energy becoming important?",o:["It is cheaper","Climate change and fossil fuel depletion","It is easy to install","Governments require it"],a:1},
+    {q:"Which is NOT mentioned as a renewable energy source?",o:["Solar panels","Wind turbines","Nuclear power","Hydroelectric"],a:2},
+    {q:"What do renewable energies NOT produce?",o:["Electricity","Greenhouse gases","Energy","Power"],a:1},
+    {q:"'Dwindling' means:",o:["Increasing","Decreasing","Stable","Unlimited"],a:1},
+    {q:"What is a long-term benefit of renewable energy?",o:["High installation cost","Reduced energy costs","More fossil fuels","Higher taxes"],a:1}
+  ]},
+  {text:"Urbanization — the movement of people from rural areas to cities — is one of the defining trends of the 21st century. Cities offer more job opportunities, better healthcare, and improved educational facilities. However, rapid urbanization also brings challenges such as overcrowding, pollution, inadequate housing, and pressure on infrastructure. Sustainable urban planning is essential to ensure that cities remain livable for future generations.",qs:[
+    {q:"What is urbanization?",o:["Movement from cities to rural areas","Movement from rural areas to cities","Population growth","Economic development"],a:1},
+    {q:"Which is a benefit of cities mentioned in the passage?",o:["Clean air","Less traffic","Better healthcare","Cheaper housing"],a:2},
+    {q:"Which is a challenge of rapid urbanization?",o:["Too many parks","Overcrowding","Too many schools","Low crime"],a:1},
+    {q:"'Inadequate' means:",o:["Sufficient","More than enough","Not enough","Perfect"],a:2},
+    {q:"What is essential for livable cities?",o:["More cars","Sustainable urban planning","Higher buildings","More factories"],a:1}
+  ]},
+  {text:"Artificial intelligence (AI) is transforming industries around the world, from healthcare to transportation. AI systems can analyze vast amounts of data faster than humans, enabling more accurate diagnoses in medicine and more efficient logistics in business. However, there are concerns about job displacement as automation replaces human workers, and ethical questions about privacy and decision-making by machines.",qs:[
+    {q:"What is AI transforming?",o:["Only healthcare","Only transportation","Industries around the world","Only education"],a:2},
+    {q:"What can AI systems do faster than humans?",o:["Run","Analyze vast amounts of data","Sleep","Communicate"],a:1},
+    {q:"What is a concern about AI?",o:["It is too slow","Job displacement","It costs nothing","It is too simple"],a:1},
+    {q:"'Logistics' refers to:",o:["Medical treatment","Management of operations","Teaching","Entertainment"],a:1},
+    {q:"'Displacement' in the passage means:",o:["Replacement","Addition","Improvement","Training"],a:0}
+  ]},
+  {text:"Biodiversity refers to the variety of life on Earth, including all plants, animals, fungi, and microorganisms. It is essential for maintaining healthy ecosystems that provide clean air, water, and food. Human activities such as deforestation, pollution, and climate change are causing species to disappear at an alarming rate. Scientists warn that the loss of biodiversity could have catastrophic consequences for human survival.",qs:[
+    {q:"What does biodiversity refer to?",o:["Only animals","Variety of all life on Earth","Only plants","Only humans"],a:1},
+    {q:"What does biodiversity help maintain?",o:["Military power","Healthy ecosystems","Economic growth","Political stability"],a:1},
+    {q:"Which human activity threatens biodiversity?",o:["Farming","Deforestation","Education","Tourism"],a:1},
+    {q:"'Catastrophic' means:",o:["Minor","Beneficial","Disastrous","Gradual"],a:2},
+    {q:"'Alarming rate' means:",o:["Slow pace","Normal speed","Worrying speed","Exciting pace"],a:2}
+  ]}
+];
+
+const vocabSets=[
+  [{q:"'Ambiguous' means:",o:["Clear","Having two meanings","Simple","Obvious"],a:1},{q:"'Persevere' means:",o:["Give up","Continue despite difficulty","Rest","Complain"],a:1},{q:"'Eloquent' means:",o:["Rude","Well-spoken","Quiet","Confused"],a:1},{q:"Synonym of 'enormous':",o:["Tiny","Huge","Average","Narrow"],a:1},{q:"Antonym of 'generous':",o:["Kind","Giving","Selfish","Friendly"],a:2},{q:"'Cautious' means:",o:["Careless","Brave","Careful","Reckless"],a:2},{q:"Synonym of 'rapid':",o:["Slow","Fast","Careful","Quiet"],a:1},{q:"'Transparent' means:",o:["Opaque","See-through","Colorful","Heavy"],a:1},{q:"Antonym of 'ancient':",o:["Old","Historical","Modern","Traditional"],a:2},{q:"'Inevitable' means:",o:["Avoidable","Impossible","Certain to happen","Surprising"],a:2}],
+  [{q:"'Diligent' means:",o:["Lazy","Hardworking","Careless","Slow"],a:1},{q:"'Profound' means:",o:["Shallow","Deep and meaningful","Simple","Loud"],a:1},{q:"Synonym of 'exhausted':",o:["Energetic","Tired","Happy","Strong"],a:1},{q:"'Versatile' means:",o:["Limited","Adaptable","Specialized","Weak"],a:1},{q:"Antonym of 'optimistic':",o:["Hopeful","Positive","Pessimistic","Cheerful"],a:2},{q:"'Concise' means:",o:["Long","Short and clear","Confusing","Repetitive"],a:1},{q:"Synonym of 'courage':",o:["Fear","Bravery","Weakness","Doubt"],a:1},{q:"'Abundant' means:",o:["Scarce","Plentiful","Empty","Hidden"],a:1},{q:"Antonym of 'expand':",o:["Grow","Increase","Shrink","Spread"],a:2},{q:"'Genuine' means:",o:["Fake","Authentic/real","Copied","Artificial"],a:1}],
+  [{q:"'Prejudice' means:",o:["Fair judgment","Unfair bias","Good decision","Careful thought"],a:1},{q:"'Humble' means:",o:["Proud","Arrogant","Modest","Boastful"],a:2},{q:"Synonym of 'ancient':",o:["Modern","New","Old","Young"],a:2},{q:"'Precise' means:",o:["Approximate","Exact","Vague","General"],a:1},{q:"Antonym of 'hostile':",o:["Aggressive","Unfriendly","Friendly","Angry"],a:2},{q:"'Adequate' means:",o:["Insufficient","Enough","Excessive","Perfect"],a:1},{q:"Synonym of 'obtain':",o:["Lose","Get","Give","Remove"],a:1},{q:"'Fragile' means:",o:["Strong","Sturdy","Easily broken","Heavy"],a:2},{q:"Antonym of 'complex':",o:["Complicated","Difficult","Simple","Detailed"],a:2},{q:"'Significant' means:",o:["Unimportant","Important","Tiny","Unclear"],a:1}],
+  [{q:"'Enhance' means:",o:["Reduce","Improve","Destroy","Ignore"],a:1},{q:"'Tedious' means:",o:["Interesting","Exciting","Boring/repetitive","Challenging"],a:2},{q:"Synonym of 'assist':",o:["Hinder","Help","Refuse","Avoid"],a:1},{q:"'Coherent' means:",o:["Confusing","Logical and clear","Disconnected","Random"],a:1},{q:"Antonym of 'triumph':",o:["Victory","Success","Defeat","Achievement"],a:2},{q:"'Rigid' means:",o:["Flexible","Soft","Inflexible","Loose"],a:2},{q:"Synonym of 'curious':",o:["Bored","Inquisitive","Uninterested","Careless"],a:1},{q:"'Distinguish' means:",o:["Combine","Mix","Differentiate","Join"],a:2},{q:"Antonym of 'decrease':",o:["Reduce","Lower","Increase","Lessen"],a:2},{q:"'Reluctant' means:",o:["Willing","Eager","Unwilling","Excited"],a:2}],
+  [{q:"'Eloquence' means:",o:["Confusion","Skill in speaking","Silence","Writing ability"],a:1},{q:"'Sovereign' means:",o:["Dependent","Supreme ruler","Subject","Servant"],a:1},{q:"Synonym of 'perplexed':",o:["Clear","Confused","Confident","Certain"],a:1},{q:"'Prosperous' means:",o:["Poor","Unsuccessful","Wealthy and successful","Unhappy"],a:2},{q:"Antonym of 'vague':",o:["Unclear","Uncertain","Precise","Ambiguous"],a:2},{q:"'Sustain' means:",o:["Destroy","Maintain/keep going","End","Start"],a:1},{q:"Synonym of 'flaw':",o:["Perfection","Strength","Defect","Advantage"],a:2},{q:"'Impartial' means:",o:["Biased","Unfair","Neutral/fair","One-sided"],a:2},{q:"Antonym of 'gradual':",o:["Slow","Steady","Sudden","Progressive"],a:2},{q:"'Eccentric' means:",o:["Normal","Unusual/strange","Boring","Common"],a:1}]
+];
+
+const grammarSets=[
+  [{q:"\"She ___ English every day.\"",o:["study","studies","studied","will study"],a:1},{q:"I have studied English ___ three years.",o:["since","for","during","while"],a:1},{q:"If I ___ you, I would study harder.",o:["am","was","were","be"],a:2},{q:"She asked me where ___ from.",o:["I came","did I come","I come","am I"],a:0},{q:"By the time he arrived, we ___ dinner.",o:["finished","finish","had finished","have finished"],a:2},{q:"He is used to ___ early.",o:["wake","wakes","waking","woke"],a:2},{q:"This is the most ___ movie I've seen.",o:["bored","boring","bore","bores"],a:1},{q:"Neither the students nor the teacher ___ ready.",o:["were","are","is","be"],a:2},{q:"The report must ___ by tomorrow.",o:["submit","submits","be submitted","submitted"],a:2},{q:"She suggested ___ to the cinema.",o:["go","to go","going","went"],a:2}],
+  [{q:"Despite ___ hard, he failed.",o:["studying","studied","to study","study"],a:0},{q:"The children ___ playing when it rained.",o:["is","are","was","were"],a:3},{q:"I wish I ___ speak French.",o:["can","could","will","would"],a:1},{q:"___ the weather is bad, we will go.",o:["Despite","Although","However","Therefore"],a:1},{q:"The police ___ investigating.",o:["is","are","was","were"],a:1},{q:"He not only sings ___ also dances.",o:["and","or","but","so"],a:2},{q:"I would rather ___ at home.",o:["stay","staying","to stay","stayed"],a:0},{q:"The news ___ shocking.",o:["were","are","is","have been"],a:2},{q:"Hardly ___ he arrived when the phone rang.",o:["had","has","did","was"],a:0},{q:"\"go\" үйл үгийн өнгөрсөн цаг:",o:["goed","goes","went","going"],a:2}],
+  [{q:"Passive: 'Someone built this house in 1990.'",o:["This house builds in 1990.","This house was built in 1990.","This house is built in 1990.","This house has built in 1990."],a:1},{q:"She told me that she ___ tired.",o:["is","was","were","be"],a:1},{q:"The ___ you study, the better your results.",o:["more","most","many","much"],a:0},{q:"He agreed ___ help us.",o:["to","with","on","for"],a:0},{q:"I am looking forward ___ you.",o:["meet","to meet","meeting","to meeting"],a:3},{q:"It is time you ___ to bed.",o:["go","went","will go","have gone"],a:1},{q:"She has ___ finished her homework.",o:["yet","already","still","just"],a:3},{q:"The man ___ car was stolen reported it.",o:["which","who","whose","whom"],a:2},{q:"If only I ___ harder in school!",o:["study","studied","had studied","will study"],a:2},{q:"'won't' гэдэг юу вэ?",o:["will","will not","would not","was not"],a:1}],
+  [{q:"He ___ to the doctor since last year.",o:["didn't go","hasn't gone","doesn't go","won't go"],a:1},{q:"The question is too ___ for me.",o:["difficulty","difficult","difficultly","more difficult"],a:1},{q:"___ he be late, call me.",o:["Should","Would","Could","Shall"],a:0},{q:"Correct sentence:",o:["She is more taller than him.","She is taller than him.","She is most tall than him.","She is the taller than him."],a:1},{q:"By 2030, renewable energy ___ half of global electricity.",o:["provides","will provide","has provided","provided"],a:1},{q:"The teacher made the students ___ the lesson.",o:["to repeat","repeat","repeating","repeated"],a:1},{q:"I can't stand ___ in queues.",o:["wait","to wait","waiting","waited"],a:2},{q:"It was such ___ good speech.",o:["a","an","the","—"],a:0},{q:"The students, ___ had studied hard, passed.",o:["who","which","whose","that"],a:0},{q:"No sooner ___ he left than it rained.",o:["had","has","did","was"],a:0}],
+  [{q:"I ___ rather you didn't tell her.",o:["will","would","should","could"],a:1},{q:"The soup smells ___.",o:["deliciously","more delicious","delicious","the most delicious"],a:2},{q:"She has lived here ___ she was born.",o:["for","since","during","while"],a:1},{q:"He denied ___ the window.",o:["break","to break","breaking","broke"],a:2},{q:"___ of the students has submitted.",o:["Each","All","Both","Some"],a:0},{q:"The film, ___ was directed by a Mongolian, won.",o:["that","which","who","what"],a:1},{q:"Had I known earlier, I ___ helped you.",o:["will have","would have","could","should"],a:1},{q:"She is used to ___ in a noisy place.",o:["work","worked","works","working"],a:3},{q:"The more you read, ___ your writing.",o:["good","better","the better","the best"],a:2},{q:"Correct passive: 'They teach English here.'",o:["English teaches here.","English is taught here.","English taught here.","English is teaching here."],a:1}]
+];
+
+const writingSets=[
+  [{q:"Correct punctuation:",o:["Mongolia is beautiful,it has mountains.","Mongolia is beautiful; it has mountains.","Mongolia is beautiful it has mountains.","Mongolia is beautiful: it has mountains."],a:1},{q:"Active voice sentence:",o:["The book was read by her.","The book is being read.","She reads the book every day.","The book has been read."],a:2},{q:"Best transition: 'She studied hard. ___, she passed.'",o:["However","Nevertheless","Therefore","Although"],a:2},{q:"Best topic sentence about pollution:",o:["I like clean air.","Pollution seriously affects human health and the environment.","Some cities have pollution.","My city is polluted."],a:1},{q:"Most formal expression:",o:["I wanna know more.","Can you tell me more?","I would like to inquire further about this matter.","Tell me more!"],a:2}],
+  [{q:"Parallel structure:",o:["She likes reading, to swim, and to hike.","She likes reading, swimming, and hiking.","She likes to read, swimming, and hike.","She likes read, swim, and hiking."],a:1},{q:"Correct spelling:",o:["accomodation","accommodation","accommadation","acomodation"],a:1},{q:"Best word: 'The scientist made a significant ___ in cancer research.'",o:["breakout","breakdown","breakthrough","breakup"],a:2},{q:"Correct sentence:",o:["Its a beautiful day.","It's a beautiful day.","Its' a beautiful day.","It is's a beautiful day."],a:1},{q:"Transition showing contrast:",o:["Furthermore","Therefore","In addition","However"],a:3}],
+  [{q:"No grammatical error:",o:["Each of the students have their own book.","Each of the students has their own book.","Each of the students are having their book.","Each of the students had have their book."],a:1},{q:"'The company needs to ___ its strategy.'",o:["adopt","adapt","adept","apt"],a:1},{q:"Best concluding sentence:",o:["In conclusion, the evidence clearly shows the importance of education.","Education is nice.","I think education is good.","There is more to say."],a:0},{q:"Dangling modifier:",o:["Running quickly, she caught the bus.","Having finished the test, students left.","Walking home, the rain started falling.","Excited about the trip, she packed."],a:2},{q:"Word meaning 'to make better':",o:["deteriorate","aggravate","improve","worsen"],a:2}],
+  [{q:"Correct article usage:",o:["She is an university student.","She is a university student.","She is the university student.","She is university student."],a:1},{q:"Avoids redundancy:",o:["The reason why I was late was because of traffic.","I was late because of traffic.","The reason was due to traffic.","I was late due to the fact that there was traffic."],a:1},{q:"Correctly punctuated:",o:["My sister, who lives in London, is a doctor.","My sister who lives in London is a doctor.","My sister, who lives in London is a doctor.","My sister who lives in London, is a doctor."],a:0},{q:"'The committee reached a ___ after debate.'",o:["conclusion","consensus","confrontation","confusion"],a:1},{q:"Correct subject-verb agreement:",o:["The team are playing well.","The team is playing well.","The team were playing well.","The team play well."],a:1}],
+  [{q:"Prefix meaning 'not':",o:["impossible","unpossible","dispossible","inpossible"],a:0},{q:"Subjunctive mood:",o:["I suggest that he goes.","I suggest that he go.","I suggest that he will go.","I suggest that he going."],a:1},{q:"Synonym for 'meticulous':",o:["Careless","Detailed and careful","Quick","General"],a:1},{q:"NOT a cohesive device:",o:["However","Therefore","Nevertheless","Beautiful"],a:3},{q:"Correct complex sentence:",o:["Although she was tired but she continued.","Although she was tired, she continued working.","Although she was tired, but she continued.","She was tired although continued working."],a:1}]
+];
+
+function buildTestQuestions(testNum) {
+  const t = testNum - 1;
+  const qs = [];
+  // Reading: 3 passages × 5 = 15
+  for (let p = 0; p < 3; p++) {
+    const pIdx = (t + p) % passages.length;
+    passages[pIdx].qs.forEach(q => qs.push({ ...q, passage: passages[pIdx].text, section: 'reading', pIdx }));
+  }
+  // Vocab: 10
+  vocabSets[t % vocabSets.length].forEach(q => qs.push({ ...q, section: 'vocab' }));
+  // Grammar: 10
+  grammarSets[t % grammarSets.length].forEach(q => qs.push({ ...q, section: 'grammar' }));
+  // Writing: 5
+  writingSets[t % writingSets.length].forEach(q => qs.push({ ...q, section: 'writing' }));
+  return qs;
+}
+
+let scores = {};
+try { scores = JSON.parse(localStorage.getItem('eesh_scores') || '{}'); } catch(e) {}
+
+function buildHome() {
+  const grid = document.getElementById('testGrid');
+  grid.innerHTML = '';
+  for (let i = 1; i <= 50; i++) {
+    const s = scores[i];
+    const card = document.createElement('div');
+    card.className = 'test-card' + (s !== undefined ? ' done' : '');
+    card.innerHTML = `<div class="test-num">Test ${i}</div>
+      <div class="test-score-label">${s !== undefined ? s+'/100 оноо' : 'Хийгдээгүй'}</div>
+      <div class="test-badge ${s !== undefined ? 'badge-done' : 'badge-new'}">${s !== undefined ? '✓ Дууссан' : 'Шинэ'}</div>`;
+    card.onclick = () => startTest(i);
+    grid.appendChild(card);
+  }
+}
+
+let currentQs = [], userAnswers = {}, timerInterval = null, timeLeft = 3600, startTime = null, currentTestNum = 1;
+
+function startTest(num) {
+  currentTestNum = num;
+  currentQs = buildTestQuestions(num);
+  userAnswers = {};
+  timeLeft = 3600;
+  startTime = Date.now();
+  document.getElementById('homePage').style.display = 'none';
+  document.getElementById('resultPage').style.display = 'none';
+  document.getElementById('testPage').style.display = 'block';
+  document.getElementById('testTitleHeader').textContent = `ЭЕШ Mock Test #${num}`;
+  buildTestBody();
+  startTimer();
+  updateProgress();
+}
+
+function buildTestBody() {
+  const body = document.getElementById('testBody');
+  let html = '';
+  let lastSection = '';
+  let lastPassage = -1;
+  const labels = { reading:'📖 УНШЛАГА — 15 асуулт (37.5 оноо)', vocab:'📚 ҮГИЙН САН — 10 асуулт (25 оноо)', grammar:'✏️ ДҮРЭМ — 10 асуулт (25 оноо)', writing:'📝 БИЧГИЙН МЭДЛЭГ — 5 асуулт (12.5 оноо)' };
+  currentQs.forEach((q, i) => {
+    if (q.section !== lastSection) {
+      html += `<div class="section-label" style="margin-top:${i>0?'24px':'0'}">${labels[q.section]}</div>`;
+      lastSection = q.section;
+      lastPassage = -1;
+    }
+    if (q.section === 'reading' && q.pIdx !== lastPassage) {
+      html += `<div class="q-passage">${q.passage}</div>`;
+      lastPassage = q.pIdx;
+    }
+    const opts = q.o.map((o,oi) => `<button class="opt" id="opt_${i}_${oi}" onclick="selectAnswer(${i},${oi},${q.a})">${['A','B','C','D'][oi]}. ${o}</button>`).join('');
+    html += `<div class="q-card" id="qcard_${i}"><div class="q-num">Асуулт ${i+1} / 40</div><div class="q-text">${q.q}</div><div class="opts">${opts}</div></div>`;
+  });
+  body.innerHTML = html;
+}
+
+function selectAnswer(qNum, optIdx, correct) {
+  if (userAnswers[qNum] !== undefined) return;
+  userAnswers[qNum] = optIdx;
+  for (let i = 0; i < 4; i++) { const el = document.getElementById(`opt_${qNum}_${i}`); if (el) el.classList.remove('selected'); }
+  const sel = document.getElementById(`opt_${qNum}_${optIdx}`);
+  if (sel) sel.classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress() {
+  const answered = Object.keys(userAnswers).length;
+  document.getElementById('answeredInfo').textContent = `${answered} / 40 асуулт хариулсан`;
+  document.getElementById('progressFill').style.width = (answered/40*100)+'%';
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft/60).toString().padStart(2,'0');
+    const s = (timeLeft%60).toString().padStart(2,'0');
+    document.getElementById('timerDisplay').textContent = `${m}:${s}`;
+    if (timeLeft <= 300) document.getElementById('timerDisplay').style.background = '#dc2626';
+    if (timeLeft <= 0) { clearInterval(timerInterval); submitTest(); }
+  }, 1000);
+}
+
+function submitTest() {
+  clearInterval(timerInterval);
+  let correct = 0;
+  currentQs.forEach((q, i) => { if (userAnswers[i] === q.a) correct++; });
+  const score = Math.round(correct/40*100);
+  const timeUsed = Math.round((Date.now()-startTime)/60000);
+  scores[currentTestNum] = score;
+  try { localStorage.setItem('eesh_scores', JSON.stringify(scores)); } catch(e) {}
+  showResult(score, correct, 40-correct, timeUsed);
+}
+
+function showResult(score, correct, wrong, timeUsed) {
+  document.getElementById('testPage').style.display = 'none';
+  document.getElementById('resultPage').style.display = 'block';
+  document.getElementById('resultScore').textContent = score;
+  document.getElementById('statCorrect').textContent = correct;
+  document.getElementById('statWrong').textContent = wrong;
+  document.getElementById('statTime').textContent = timeUsed;
+  let grade, msg;
+  if (score>=90){grade='A+';msg='🏆 Гайхалтай! ЭЕШ-д маш өндөр оноо авна!';}
+  else if (score>=80){grade='A';msg='🌟 Маш сайн! Цааш үргэлжлүүл!';}
+  else if (score>=70){grade='B';msg='👍 Сайн! Бага зэрэг сайжруулах хэрэгтэй.';}
+  else if (score>=60){grade='C';msg='📚 Дунд зэрэг. Дахин давтаарай!';}
+  else if (score>=50){grade='D';msg='💪 Тэвчээртэй хичээ. Чи чадна!';}
+  else{grade='F';msg='📖 Дахин эхнээс хичээгээрэй!';}
+  document.getElementById('resultGrade').textContent = grade;
+  document.getElementById('resultMsg').textContent = msg;
+
+  const rev = document.getElementById('reviewSection');
+  let rhtml = '<div class="review-title">📖 Асуулт бүрийн дүгнэлт</div>';
+  currentQs.forEach((q, i) => {
+    const ua = userAnswers[i];
+    const ok = ua === q.a;
+    rhtml += `<div class="review-card ${ok?'correct-card':'wrong-card'}">
+      <div class="review-q">${i+1}. ${q.q}</div>
+      ${ua!==undefined?`<div class="review-ans review-${ok?'correct':'wrong'}">Таны хариулт: ${q.o[ua]}</div>`:'<div class="review-ans review-wrong">Хариулаагүй</div>'}
+      ${!ok?`<div class="review-ans review-correct">Зөв хариулт: ${q.o[q.a]}</div>`:''}
+    </div>`;
+  });
+  rev.innerHTML = rhtml;
+}
+
+function toggleReview() {
+  const s = document.getElementById('reviewSection');
+  s.style.display = s.style.display==='none'?'block':'none';
+}
+
+function goHome() {
+  document.getElementById('resultPage').style.display = 'none';
+  document.getElementById('homePage').style.display = 'block';
+  buildHome();
+}
+
+buildHome();
+</script>
+</body>
+</html>
